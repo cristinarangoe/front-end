@@ -10,9 +10,9 @@ export const Menu = () => {
 	const menuOptions: string[] = [
 		'Fibonacci',
 		'Factorial',
-		'Triangulo',
-		'Circulo',
-		'Rectangulo',
+		'Triángulo',
+		'Círculo',
+		'Rectágulo',
 	];
 	const normalForm: string[] = ['Fibonacci', 'Factorial'];
 	const complexForm: string[] = ['Triangulo', 'Circulo', 'Rectangulo'];

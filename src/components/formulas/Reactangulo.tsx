@@ -3,11 +3,12 @@ import React from 'react';
 export const Reactangulo = () => {
 	return (
 		<div className="mt-2">
+			<h3 className="underline text-md">Fórmulas usadas:</h3>
 			<pre>
-				<i>Perimetro</i> = <i>(2 x largo) + (2 x ancho)</i>
+				<i>Perímetro</i> = <i>(2 x largo) + (2 x ancho)</i>
 			</pre>
 			<pre>
-				<i>Area</i> = <i>largo x ancho</i>
+				<i>Área</i> = <i>largo x ancho</i>
 			</pre>
 		</div>
 	);
