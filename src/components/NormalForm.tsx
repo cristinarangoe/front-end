@@ -21,9 +21,12 @@ export const NormalForm: React.FC<NormalFormProps> = ({ menuValue }) => {
 	return (
 		<div className="flex flex-col items-center justify-start">
 			<div className="w-auto flex flex-col items-start">
-				<h3 className="font-bold text-lg">Description:</h3>
+				<h3 className="font-bold text-lg">Descripción:</h3>
 				<p className="text-md align-middle text-gray-500 ">
-					Generacion de secuencia {menuValue}, a partir de un valor n
+					Generacion de secuencia {menuValue}, a partir de un número n
+				</p>
+				<p className="text-md align-middle text-gray-500 ">
+					Por favor ingrese a continuación el número n al que le desea hacer los cálculos.
 				</p>
 				{menuValue == 'Fibonacci' ? (
 					<Fibonacci />
@@ -46,7 +49,7 @@ export const NormalForm: React.FC<NormalFormProps> = ({ menuValue }) => {
 					type="submit"
 					className="ml-10 bg-green-500 text-white px-2 py-1 rounded-md"
 				>
-					Submit
+					Calcular
 				</button>
 			</form>
 		</div>
