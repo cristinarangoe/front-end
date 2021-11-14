@@ -1,11 +1,8 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { Circulo as Formula } from './formulas/Circulo';
-import { Reactangulo } from './formulas/Reactangulo';
-import { Triangulo } from './formulas/Triangulo';
-
 interface NormalFormProps {
-	menuValue: string | 'Triangulo' | 'Circulo' | 'Reactangulo';
+	menuValue: string | 'Triangulo' | 'Circulo' | 'Rectangulo';
 }
 
 export const Circulo: React.FC<NormalFormProps> = ({ menuValue }) => {
@@ -21,9 +18,12 @@ export const Circulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 	return (
 		<div className="flex flex-col items-center justify-start">
 			<div className="w-auto flex flex-col items-start">
-				<h3 className="font-bold text-lg">Description:</h3>
+				<h3 className="font-bold text-lg">Descripción:</h3>
 				<p className="text-md align-middle text-gray-500 ">
-					Calculo de perimetro y Area de {menuValue} segun sus parametros
+					Cálculo de perimetro y Área de {menuValue} según sus parametros.
+				</p>
+				<p className="text-md align-middle text-gray-500 ">
+					Por favor ingrese a continuación el radio del círculo al que le desea hacer los cálculos.
 				</p>
 				<Formula />
 			</div>
@@ -50,7 +50,7 @@ export const Circulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 					type="submit"
 					className="ml-10 bg-green-500 text-white px-2 py-1 rounded-md"
 				>
-					Submit
+					Calcular
 				</button>
 			</form>
 		</div>

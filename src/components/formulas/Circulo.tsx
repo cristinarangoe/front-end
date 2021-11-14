@@ -3,13 +3,14 @@ import React from 'react';
 export const Circulo = () => {
 	return (
 		<div className="mt-2">
+			<h3 className="underline text-md">Fórmulas usadas:</h3>
 			<pre>
-				<i>Perimetro</i> = <i>2pi x r</i>
+				<i>Perímetro</i> = <i>2π x r</i>
 			</pre>
 			<pre>
-				<i>Area</i> ={' '}
+				<i>Área</i> ={' '}
 				<i>
-					pi x r<sup>2</sup>
+				π x r<sup>2</sup>
 				</i>
 			</pre>
 		</div>

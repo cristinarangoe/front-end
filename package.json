@@ -1,6 +1,7 @@
 {
   "name": "front-end",
   "version": "0.0.0",
+  "author": "Cristina Arango Escobar",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
