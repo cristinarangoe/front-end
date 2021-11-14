@@ -22,7 +22,7 @@ export const Reactangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 			const respuesta = await axios.post(`http://localhost:8000/${menuValue}`,values);
 			
 			setResultado(respuesta.data)
-			resetForm({});
+			// resetForm({});
 		},
 	});
 	return (
@@ -78,10 +78,12 @@ export const Reactangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 					Calcular
 				</button>
 			</form>
-			<div>
-				<pre>{resultado?.area}</pre>
-				<pre>{resultado?.perimetro}</pre>
-
+			<div className="w-full bg-gray-50 border rounded-md mt-10 px-10 py-5 mb-20">
+				<pre><span className="text-red-500">Respuesta:</span></pre>
+				<div className="flex flex-col space-y-2 mt-4">
+					<pre><span className="font-semibold">Area:</span> {resultado?.area} u<sup>2</sup></pre>
+					<pre><span className="font-semibold">Perimetro:</span> {resultado?.perimetro} u<sup>2</sup></pre>
+				</div>
 			</div>
 		</div>
 	);

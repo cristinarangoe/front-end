@@ -11,7 +11,7 @@ interface NormalFormProps {
 
 
 export const Factorial: React.FC<NormalFormProps> = ({ menuValue }) => {
-	const [resultado, setResultado] = useState<number | null | number[]>(null);
+	const [resultado, setResultado] = useState<number | null >(null);
 	const [estadoConsulta, setEstadoConsulta] = useState<string | null>(null);
 
 	const formik = useFormik({
@@ -23,7 +23,7 @@ export const Factorial: React.FC<NormalFormProps> = ({ menuValue }) => {
 			
 			setResultado(respuesta.data)
 			
-			resetForm({});
+			// resetForm({});
 		},
 	});
 
@@ -66,8 +66,8 @@ export const Factorial: React.FC<NormalFormProps> = ({ menuValue }) => {
 					Calcular
 				</button>
 			</form>
-			<div>
-				<pre>{resultado}</pre>
+			<div className="w-full bg-gray-50 border rounded-md mt-10 px-10 py-5 mb-20">
+				<pre><span className="text-red-500">Respuesta:</span> {resultado}</pre>
 			</div>
 		</div>
 	);

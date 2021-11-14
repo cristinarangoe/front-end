@@ -11,7 +11,7 @@ interface NormalFormProps {
 
 
 export const Fibonacci: React.FC<NormalFormProps> = ({ menuValue }) => {
-	const [resultado, setResultado] = useState<number | null | number[]>(null);
+	const [resultado, setResultado] = useState<null | number[]>(null);
 	const [estadoConsulta, setEstadoConsulta] = useState<string | null>(null);
 
 	const formik = useFormik({
@@ -22,17 +22,14 @@ export const Fibonacci: React.FC<NormalFormProps> = ({ menuValue }) => {
 			const respuesta = await axios.post(`http://localhost:8000/${menuValue}`,values);
 			
 			setResultado(respuesta.data)
+			console.log(respuesta.data);
 			
-			resetForm({});
+			
+			// resetForm({});
 		},
 	});
 
 
-	// if (error) return <div>failed to load</div>
-	// if (!data) return <div>loading...</div>
-  
-	// // render data
-	// return <div>hello {data.name}!</div>
 
 	return (
 		<div className="flex flex-col items-center justify-start">
@@ -65,8 +62,16 @@ export const Fibonacci: React.FC<NormalFormProps> = ({ menuValue }) => {
 					Calcular
 				</button>
 			</form>
-			<div>
-				<pre>{resultado}</pre>
+			<div className="w-full bg-gray-50 border rounded-md mt-10 px-10 py-5 mb-20">
+				<pre className="text-red-500">Serie:</pre>
+				<div className="mt-4">
+				{resultado?.map((val,key) => (
+					<div key={key} className="px-15">
+					<pre ><span className="text-sm font-bold">{key}</span>: {val}</pre>
+					</div>
+				))}
+				</div>
+				
 			</div>
 		</div>
 	);
