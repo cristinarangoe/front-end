@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { Fibonacci as Formula } from '../formulas/Fibonacci';
+import { Formula } from './Formula';
 import axios from'axios';
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Factorial = () => {
+export const Formula = () => {
 	return (
 		<div className="mt-2">
 			<h3 className="underline text-md">Fórmulas usadas:</h3>

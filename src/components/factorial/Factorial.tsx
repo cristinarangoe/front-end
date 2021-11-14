@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { Factorial as Formula } from '../formulas/Factorial';
-
+import { Formula } from './Formula';
 import axios from'axios';
 
 

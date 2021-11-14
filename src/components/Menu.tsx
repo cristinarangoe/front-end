@@ -14,7 +14,7 @@ export const Menu = () => {
     "Factorial",
     "Triangulo",
     "Circulo",
-    "Rectagulo",
+    "Rectangulo",
   ];
   const normalForm: string[] = ["Fibonacci", "Factorial"];
   const complexForm: string[] = ["Triangulo", "Circulo", "Rectangulo"];

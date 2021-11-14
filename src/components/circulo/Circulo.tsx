@@ -1,17 +1,29 @@
 import { useFormik } from 'formik';
-import React from 'react';
-import { Circulo as Formula } from '../formulas/Circulo';
+import React, { useState } from 'react';
+import { Formula } from './Formula';
+import axios from'axios';
+
 interface NormalFormProps {
 	menuValue: string | 'Triangulo' | 'Circulo' | 'Rectangulo';
 }
 
+interface ResultadoGeometrico { 
+	area: number;
+	perimetro: number;
+
+}
+
 export const Circulo: React.FC<NormalFormProps> = ({ menuValue }) => {
+	const [resultado, setResultado] = useState<ResultadoGeometrico | null>(null);
+
 	const formik = useFormik({
 		initialValues: {
 			r: '',
 		},
-		onSubmit: (values, { resetForm }) => {
-			alert(JSON.stringify(values, null, 2));
+		onSubmit: async (values, { resetForm }) => {
+			const respuesta = await axios.post(`http://localhost:8000/${menuValue}`,values);
+			
+			setResultado(respuesta.data)
 			resetForm({});
 		},
 	});
@@ -53,6 +65,11 @@ export const Circulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 					Calcular
 				</button>
 			</form>
+			<div>
+				<pre>{resultado?.area}</pre>
+				<pre>{resultado?.perimetro}</pre>
+
+			</div>
 		</div>
 	);
 };
