@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { Factorial } from './formulas/Factorial';
-import { Fibonacci } from './formulas/Fibonacci';
+import { Factorial as Formula } from '../formulas/Factorial';
+
+import axios from'axios';
+
 
 interface NormalFormProps {
 	menuValue: string;
 }
 
-export const NormalForm: React.FC<NormalFormProps> = ({ menuValue }) => {
+
+
+export const Factorial: React.FC<NormalFormProps> = ({ menuValue }) => {
+	const [resultado, setResultado] = useState<number | null | number[]>(null);
+	const [estadoConsulta, setEstadoConsulta] = useState<string | null>(null);
+
 	const formik = useFormik({
 		initialValues: {
 			n: '',
 		},
-		onSubmit: (values, { resetForm }) => {
-			alert(JSON.stringify(values, null, 2));
+		onSubmit: async (values, { resetForm }) => {
+			const respuesta = await axios.post(`http://localhost:8000/${menuValue}`,values);
+			
+			setResultado(respuesta.data)
+			
 			resetForm({});
 		},
 	});
+
+
+	// if (error) return <div>failed to load</div>
+	// if (!data) return <div>loading...</div>
+  
+	// // render data
+	// return <div>hello {data.name}!</div>
 
 	return (
 		<div className="flex flex-col items-center justify-start">
@@ -28,11 +45,9 @@ export const NormalForm: React.FC<NormalFormProps> = ({ menuValue }) => {
 				<p className="text-md align-middle text-gray-500 ">
 					Por favor ingrese a continuación el número n al que le desea hacer los cálculos.
 				</p>
-				{menuValue == 'Fibonacci' ? (
-					<Fibonacci />
-				) : menuValue == 'Factorial' ? (
-					<Factorial />
-				) : null}
+			
+					<Formula />
+
 			</div>
 
 			<form onSubmit={formik.handleSubmit} className="mt-10">
@@ -47,11 +62,14 @@ export const NormalForm: React.FC<NormalFormProps> = ({ menuValue }) => {
 				/>
 				<button
 					type="submit"
-					className="ml-10 bg-green-500 text-white px-2 py-1 rounded-md"
+					className="ml-10 bg-blue-400 text-white px-2 py-1 rounded-md"
 				>
 					Calcular
 				</button>
 			</form>
+			<div>
+				<pre>{resultado}</pre>
+			</div>
 		</div>
 	);
 };

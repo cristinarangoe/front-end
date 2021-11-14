@@ -1,17 +1,17 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import { Triangulo as Formula } from './formulas/Triangulo';
+import { Reactangulo as Formula } from '../formulas/Reactangulo';
+import { Triangulo } from '../formulas/Triangulo';
 
 interface NormalFormProps {
 	menuValue: string | 'Triangulo' | 'Circulo' | 'Reactangulo';
 }
 
-export const Triangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
+export const Reactangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 	const formik = useFormik({
 		initialValues: {
-			l1: '',
-			l2: '',
-			l3: '',
+			largo: '',
+			ancho: '',
 		},
 		onSubmit: (values, { resetForm }) => {
 			alert(JSON.stringify(values, null, 2));
@@ -26,7 +26,7 @@ export const Triangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 					Calculo de perímetro y Área de {menuValue} segun sus parámetros.
 				</p>
 				<p className="text-md align-middle text-gray-500 ">
-					Por favor ingrese a continuación los trés lados del triángulo al que le desea hacer los cálculos.
+					Por favor ingrese a continuación el largo y ancho del rectángulo al que le desea hacer los cálculos.
 				</p>
 				<Formula />
 			</div>
@@ -35,53 +35,38 @@ export const Triangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 				className="mt-10 flex flex-col space-y-5"
 			>
 				<div className="flex flex-row space-x-5">
-					<label htmlFor="l1">
+					<label htmlFor="largo">
 						<pre>
-							<i>l1:</i>
+							<i>largo:</i>
 						</pre>
 					</label>
 					<input
-						id="l1"
-						name="l1"
+						id="largo"
+						name="largo"
 						type="number"
 						className="px-2 py-1 bg-gray-50 border rounded-md ml-5"
 						onChange={formik.handleChange}
-						value={formik.values.l1}
+						value={formik.values.largo}
 					/>
 				</div>
 				<div className="flex flex-row space-x-5">
-					<label htmlFor="l2">
+					<label htmlFor="ancho">
 						<pre>
-							<i>l2:</i>
+							<i>ancho:</i>
 						</pre>
 					</label>
 					<input
-						id="l2"
-						name="l2"
+						id="ancho"
+						name="ancho"
 						type="number"
 						className="px-2 py-1 bg-gray-50 border rounded-md ml-5"
 						onChange={formik.handleChange}
-						value={formik.values.l2}
-					/>
-				</div>
-				<div className="flex flex-row space-x-5">
-					<label htmlFor="l3">
-						<pre>
-							<i>l3:</i>
-						</pre>
-					</label>
-					<input
-						id="l3"
-						name="l3"
-						type="number"
-						className="px-2 py-1 bg-gray-50 border rounded-md ml-5"
-						onChange={formik.handleChange}
-						value={formik.values.l3}
+						value={formik.values.ancho}
 					/>
 				</div>
 				<button
 					type="submit"
-					className="ml-10 bg-green-500 text-white px-2 py-1 rounded-md"
+					className="ml-10 bg-blue-400 text-white px-2 py-1 rounded-md"
 				>
 					Calcular
 				</button>

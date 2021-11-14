@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import { Circulo as Formula } from './formulas/Circulo';
+import { Circulo as Formula } from '../formulas/Circulo';
 interface NormalFormProps {
 	menuValue: string | 'Triangulo' | 'Circulo' | 'Rectangulo';
 }
@@ -48,7 +48,7 @@ export const Circulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 				</div>
 				<button
 					type="submit"
-					className="ml-10 bg-green-500 text-white px-2 py-1 rounded-md"
+					className="ml-10 bg-blue-400 text-white px-2 py-1 rounded-md"
 				>
 					Calcular
 				</button>
