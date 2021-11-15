@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Formula } from './Formula';
 import axios from 'axios';
+import requestCalculos from '../../request';
 
 interface NormalFormProps {
 	menuValue: string | 'Triangulo' | 'Circulo' | 'Reactangulo';
@@ -20,9 +21,9 @@ export const Triangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 			l3: '',
 		},
 		onSubmit: async (values, { resetForm }) => {
-			const respuesta = await axios.post(`http://localhost:8000/${menuValue}`,values);
+			const respuesta = await requestCalculos(menuValue,values)
 			
-			setResultado(respuesta.data)
+			setResultado(respuesta)
 			// resetForm({});
 		},
 	});

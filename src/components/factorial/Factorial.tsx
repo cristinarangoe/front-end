@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { Formula } from './Formula';
 import axios from'axios';
+import requestCalculos from '../../request';
 
 
 interface NormalFormProps {
@@ -19,9 +20,9 @@ export const Factorial: React.FC<NormalFormProps> = ({ menuValue }) => {
 			n: '',
 		},
 		onSubmit: async (values, { resetForm }) => {
-			const respuesta = await axios.post(`http://localhost:8000/${menuValue}`,values);
+			const respuesta = await requestCalculos(menuValue,values)
 			
-			setResultado(respuesta.data)
+			setResultado(respuesta)
 			
 			// resetForm({});
 		},
