@@ -11,16 +11,36 @@ interface ResultadoGeometrico {
 	area: number;
 	perimetro: number;
 }
+
+type positive<T extends number> =
+    number extends T 
+        ? never 
+        : `${T}` extends `-${string}` | `${string}.${string}`
+            ? never 
+            : T;
+interface TrianguloInterface {
+	l1:positive<number>;l2:positive<number>;l3:positive<number>
+}
 export const Triangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 	const [resultado, setResultado] = useState<ResultadoGeometrico | null>(null);
+	const [error, setError] = useState<string | null >(null);
+
 
 	const formik = useFormik({
 		initialValues: {
 			l1: '',
 			l2: '',
 			l3: '',
-		},
-		onSubmit: async (values, { resetForm }) => {
+		} as TrianguloInterface,
+		onSubmit: async (values:TrianguloInterface, { resetForm }) => {
+			if (values.l1 <= 0 || values.l2 <= 0 || values.l3 <= 0 ) {
+				setError('Error valores negativos, 0 o nulls') 	
+			}else if (values.l1 <  values.l2  + values.l3 || values.l2 <  values.l1  + values.l3 || values.l3 <  values.l1  + values.l2){
+				setError('Error los lados no cumplen con la condicion de un triangulo') 
+			}
+			else{
+				setError(null)
+			}
 			const respuesta = await requestCalculos(menuValue,values)
 			
 			setResultado(respuesta)
@@ -98,8 +118,11 @@ export const Triangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 			<div className="w-full bg-gray-50 border rounded-md mt-10 px-10 py-5 mb-20">
 				<pre><span className="text-red-500">Respuesta:</span></pre>
 				<div className="flex flex-col space-y-2 mt-4">
-					<pre><span className="font-semibold">Area:</span> {resultado?.area} u<sup>2</sup></pre>
-					<pre><span className="font-semibold">Perimetro:</span> {resultado?.perimetro} u<sup>2</sup></pre>
+				{error == null ? (
+						<>
+						<pre><span className="font-semibold">Area:</span> {resultado?.area } u<sup>2</sup></pre>
+					<pre><span className="font-semibold">Perimetro:</span> {resultado?.perimetro} u<sup>2</sup></pre></>
+): <pre className="text-red-500">{error}</pre>}
 				</div>
 			</div>
 			

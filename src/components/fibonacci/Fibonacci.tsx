@@ -9,17 +9,35 @@ interface NormalFormProps {
 	menuValue: string;
 }
 
+type positive<T extends number> =
+    number extends T 
+        ? never 
+        : `${T}` extends `-${string}` | `${string}.${string}`
+            ? never 
+            : T;
+interface FibonacciInterface {
+	n: positive<number>
 
+}
 
 export const Fibonacci: React.FC<NormalFormProps> = ({ menuValue }) => {
 	const [resultado, setResultado] = useState<null | number[]>(null);
 	const [estadoConsulta, setEstadoConsulta] = useState<string | null>(null);
+	const [error, setError] = useState<string | null >(null);
+
 
 	const formik = useFormik({
 		initialValues: {
 			n: '',
-		},
-		onSubmit: async (values, { resetForm }) => {
+		} as FibonacciInterface,
+		onSubmit: async (values:FibonacciInterface, { resetForm }) => {
+
+			if (values.n < 0 || !Number.isInteger(values.n)) {
+				setError('Error valores negativos o nulls') 	
+			}else{
+				setError(null)
+			}
+
 			const respuesta = await requestCalculos(menuValue,values)
 			
 			setResultado(respuesta)
@@ -66,11 +84,20 @@ export const Fibonacci: React.FC<NormalFormProps> = ({ menuValue }) => {
 			<div className="w-full bg-gray-50 border rounded-md mt-10 px-10 py-5 mb-20">
 				<pre className="text-red-500">Serie:</pre>
 				<div className="mt-4">
-				{resultado?.map((val,key) => (
+				{error == null ? (
+						<>
+							{resultado?.map((val,key) => (
 					<div key={key} className="px-15">
 					<pre ><span className="text-sm font-bold">{key}</span>: {val}</pre>
 					</div>
 				))}
+						</>
+): <pre className="text-red-500">{error}</pre>}
+				{/* {resultado?.map((val,key) => (
+					<div key={key} className="px-15">
+					<pre ><span className="text-sm font-bold">{key}</span>: {val}</pre>
+					</div>
+				))} */}
 				</div>
 				
 			</div>

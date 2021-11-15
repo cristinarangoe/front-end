@@ -14,6 +14,7 @@ interface NormalFormProps {
 export const Factorial: React.FC<NormalFormProps> = ({ menuValue }) => {
 	const [resultado, setResultado] = useState<number | null >(null);
 	const [estadoConsulta, setEstadoConsulta] = useState<string | null>(null);
+	const [error, setError] = useState<string | null >(null);
 
 	const formik = useFormik({
 		initialValues: {

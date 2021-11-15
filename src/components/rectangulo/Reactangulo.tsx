@@ -10,18 +10,39 @@ interface ResultadoGeometrico {
 	area: number;
 	perimetro: number;
 }
+// function negate<N extends number>(n: NonNegativeInteger<N>): number {
+//     return -n;
+// }
+type positive<T extends number> =
+    number extends T 
+        ? never 
+        : `${T}` extends `-${string}` | `${string}.${string}`
+            ? never 
+            : T;
+interface RectanguloInterface {
+	largo: positive<number>
+	ancho: positive<number>
+}
 export const Reactangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
-	const [resultado, setResultado] = useState<ResultadoGeometrico | null>(null);
+	const [resultado, setResultado] = useState<ResultadoGeometrico | null >();(null);
+	const [error, setError] = useState<string | null >(null);
 
 	const formik = useFormik({
 		initialValues: {
 			largo: '',
 			ancho: '',
-		},
-		onSubmit: async(values, { resetForm }) => {
-			const respuesta = await requestCalculos(menuValue,values)
+		} as RectanguloInterface,
+		onSubmit: async(values:RectanguloInterface, { resetForm }) => {
 			
-			setResultado(respuesta)
+			if (values.largo <= 0 || values.ancho <= 0) {
+				setError('Error valores negativos, 0 o nulls') 	
+			}else{
+				setError(null)
+			}
+
+				const respuesta = await requestCalculos(menuValue,values)
+				setResultado(respuesta)
+			
 			// resetForm({});
 		},
 	});
@@ -81,8 +102,12 @@ export const Reactangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 			<div className="w-full bg-gray-50 border rounded-md mt-10 px-10 py-5 mb-20">
 				<pre><span className="text-red-500">Respuesta:</span></pre>
 				<div className="flex flex-col space-y-2 mt-4">
-					<pre><span className="font-semibold">Area:</span> {resultado?.area} u<sup>2</sup></pre>
-					<pre><span className="font-semibold">Perimetro:</span> {resultado?.perimetro} u<sup>2</sup></pre>
+					{error == null ? (
+						<>
+						<pre><span className="font-semibold">Area:</span> {resultado?.area } u<sup>2</sup></pre>
+					<pre><span className="font-semibold">Perimetro:</span> {resultado?.perimetro} u<sup>2</sup></pre></>
+): <pre className="text-red-500">{error}</pre>}
+					
 				</div>
 			</div>
 		</div>
