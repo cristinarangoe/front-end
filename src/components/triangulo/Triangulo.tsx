@@ -35,7 +35,7 @@ export const Triangulo: React.FC<NormalFormProps> = ({ menuValue }) => {
 		onSubmit: async (values:TrianguloInterface, { resetForm }) => {
 			if (values.l1 <= 0 || values.l2 <= 0 || values.l3 <= 0 ) {
 				setError('Error valores negativos, 0 o nulls') 	
-			}else if (values.l1 <  values.l2  + values.l3 || values.l2 <  values.l1  + values.l3 || values.l3 <  values.l1  + values.l2){
+			}else if (!(values.l1 <  values.l2  + values.l3) || !(values.l2 <  values.l1  + values.l3) || !(values.l3 <  values.l1  + values.l2)){
 				setError('Error los lados no cumplen con la condicion de un triangulo') 
 			}
 			else{
